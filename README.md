@@ -6,10 +6,11 @@ This project implements a library management system focusing on CRUD operations 
 
 - [Features](#features)
 - [Setup](#setup)
-- [Running the App](#running-the-app)
+- [Running the App (using Virtualenv)](#running-the-app-with-virtualenv)
+- [Runnung the App (using Docker)](#running-the-app-with-docker)
 - [Testing](#testing)
-- [Docker](#docker)
 - [API Documentation](#api-documentation)
+- [Example Endpoints](#example-endpoints)
 - [Assumptions](#assumptions)
 
 ## Features
@@ -28,7 +29,7 @@ This project implements a library management system focusing on CRUD operations 
 - Django 3.2+
 - Docker (if using Docker setup)
 
-### Installation
+### Installation (using Virtualenv)
 
 1. Clone the repository:
     ```bash
@@ -41,28 +42,35 @@ This project implements a library management system focusing on CRUD operations 
     python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
+3. rename `env-template` file to `.env`.
 
-3. Install dependencies:
+4. Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
+5. Navigate to `settings.py` and uncomment the first block for db connections where `sqlite3` is used.
 
-4. Apply migrations:
+6. Apply migrations:
     ```bash
     python manage.py migrate
     ```
 
-5. Create a superuser:
+7. Create a superuser:
     ```bash
     python manage.py createsuperuser
     ```
 
-6. Run the development server:
+8. Load initial data:
+    ```bash
+    python manage.py loaddata initial_data.json
+    ```
+
+9. Run the development server:
     ```bash
     python manage.py runserver
     ```
 
-## Running the App
+## Running the App With Virtualenv
 
 1. Ensure the virtual environment is activated.
 2. Start the Django development server:
@@ -71,44 +79,31 @@ This project implements a library management system focusing on CRUD operations 
     ```
 3. Open a browser and navigate to `http://127.0.0.1:8000/` to see the application running.
 
+
+## Running the App With Docker
+1. rename `env-template` file to `.env`.
+
+2. Navigate to `settings.py` and uncomment the 2nd block for db connections where `postgresql` is being used.
+
+3. Build & Start the Docker image:
+this step included build & start the containers and load inital data
+    ```bash
+    docker-compose up --build
+    ```
+
+4. Open a browser and navigate to http://127.0.0.1:8000/ to see the application running.
+
+
 ## Testing
 
 ### Running Unit Tests
 
-1. Ensure the virtual environment is activated.
+1. Ensure the virtual environment is activated if you're using it to run the app OR access shell environment for your docker containers.
+
 2. Run the tests using pytest:
     ```bash
     pytest
     ```
-
-### Loading Dummy Data
-
-1. Load initial data from the fixture file:
-    ```bash
-    python manage.py loaddata initial_data.json
-    ```
-
-## Docker
-
-### Docker Configuration
-
-1. Build the Docker image:
-    ```bash
-    docker-compose build
-    ```
-
-2. Start the containers:
-    ```bash
-    docker-compose up
-    ```
-
-3. Apply migrations and create a superuser inside the web container:
-    ```bash
-    docker-compose exec web python manage.py migrate
-    docker-compose exec web python manage.py createsuperuser
-    ```
-
-4. The application will be available at `http://127.0.0.1:8000/`.
 
 ### API Documentation
 API documentation is available at /docs/ when the server is running.
@@ -126,6 +121,6 @@ API documentation is available at /docs/ when the server is running.
 - Delete Borrow Record: DELETE /api/borrow-records/{id}/
 
 ## Assumptions
-Each book can only be borrowed by one user at a time.
-Borrow records are updated to mark books as returned.
-Authentication is required for all operations.
+- Each book can only be borrowed by one user at a time.
+- Borrow records are updated to mark books as returned.
+- Authentication is required for all operations.

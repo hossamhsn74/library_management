@@ -1,0 +1,12 @@
+SECRET_KEY=django-insecure-b6y+q0+t)!k@7fa&k=at5r64n!qo$kfa9ynhiauu1=2vsi!2o3
+DEBUG=True
+DB_NAME=test
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+DB_HOST=db
+DB_PORT=5432
+
+
+DJANGO_SUPERUSER_PASSWORD=123
+DJANGO_SUPERUSER_EMAIL=root@dev.com
+DJANGO_SUPERUSER_USERNAME=root
