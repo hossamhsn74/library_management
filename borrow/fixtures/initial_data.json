@@ -1,0 +1,41 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "testuser",
+            "password": "pbkdf2_sha256$260000$eKnGkT7SZrMyx2pX1zgMhO$OBzbfEghCfyQilV1RryYgM89Q8ifzjvIWuZQYm7F8Ko=",
+            "is_superuser": false,
+            "is_staff": false,
+            "is_active": true
+        }
+    },
+    {
+        "model": "borrow.book",
+        "pk": 1,
+        "fields": {
+            "title": "Django for Beginners",
+            "author": 1,
+            "available": true
+        }
+    },
+    {
+        "model": "borrow.book",
+        "pk": 2,
+        "fields": {
+            "title": "Advanced Django",
+            "author": 1,
+            "available": true
+        }
+    },
+    {
+        "model": "borrow.borrowrecord",
+        "pk": 1,
+        "fields": {
+            "book": 1,
+            "borrower": 1,
+            "borrow_date": "2024-07-23",
+            "return_date": null
+        }
+    }
+]
